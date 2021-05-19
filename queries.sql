@@ -1,5 +1,7 @@
 --Count how many parts in NYC have more than 70 parts on hand
-
+SELECT COUNT(part_number)
+FROM part_nyc 
+WHERE 
 
 --Count how many total parts on hand, in both NYC AND SFO, are Red
 
