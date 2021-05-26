@@ -2,13 +2,24 @@
 
 
 --Count how many parts in NYC have more than 70 parts on hand
-SELECT COUNT(part_number)
-FROM part_nyc 
-WHERE part_number > 70; --without index
+SELECT COUNT(PN.part_number)
+FROM part_nyc PN
+WHERE PN.on_hand > 70; --without index
 
-
+SELECT PN.part_number, COUNT(*)
+FROM part_nyc PN
+WHERE PN.on_hand > 70
+GROUP BY PN.part_number; --with index
 
 --Count how many total parts on hand, in both NYC AND SFO, are Red
+SELECT COUNT(PN.on_hand) AS pn_hand 
+FROM part_nyc PN
+WHERE PN.color = 'Red';
+SELECT COUNT(PS.on_hand) AS ps_hand
+FROM part_sfo PS
+WHERE PS.color = 'Red';
+SELECT pn_hand + ps_hand; --without index
+
 
 
 --List all the suppliers that have more total on_hand parts in NYC than they do in SFO.
