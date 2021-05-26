@@ -13,19 +13,19 @@ GROUP BY PN.part_number; --with index
 
 --Count how many total parts on hand, in both NYC AND SFO, are Red
 SELECT COUNT(PN.on_hand) AS pn_hand 
-FROM part_nyc PN
-WHERE PN.color = 'Red';
+FROM part_nyc PN, color C
+WHERE C.color_id = PN.color AND C.color_name = 'Red';
 SELECT COUNT(PS.on_hand) AS ps_hand
-FROM part_sfo PS
-WHERE PS.color = 'Red';
+FROM part_sfo PS, color C
+WHERE C.color_id = PS.color AND C.color_name = 'Red';
 SELECT (pn_hand + ps_hand); --without index
 
 SELECT COUNT(*) AS pn_hand2
-FROM part_nyc
-WHERE color = 'Red';
+FROM part_nyc PN, color C
+WHERE C.color_id = PN.color AND C.color_name = 'Red';
 SELECT COUNT(*) AS ps_hand2
 FROM part_sfo
-WHERE color = 'Red';
+WHERE C.color_id = PF.color AND C.color_name = 'Red'
 SELECT (pn_hand2 + ps_hand2); --with index
 
 --List all the suppliers that have more total on_hand parts in NYC than they do in SFO.
