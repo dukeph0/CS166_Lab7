@@ -1,3 +1,6 @@
+-- Write the following SQL queries in queries.sql both with and without indexes.
+
+
 --Count how many parts in NYC have more than 70 parts on hand
 SELECT COUNT(part_number)
 FROM part_nyc 
