@@ -31,7 +31,7 @@ SELECT (pn_hand2 + ps_hand2); --with index
 --List all the suppliers that have more total on_hand parts in NYC than they do in SFO.
 SELECT S.supplier_name 
 FROM supplier S, part_nyc PN, part_sfo PS
-WHERE COUNT(PN.on_hand) > COUNT(PS.on_hand); --without index
+WHERE PN.on_hand > PS.on_hand; --without index
 
 SELECT S.supplier_name
 FROM supplier S, part_nyc PN, part_sfo PS
@@ -40,7 +40,7 @@ WHERE COUNT(PN.*) > COUNT(PS.*); --with index
 --List all the suppliers that supply parts in NYC that aren't supplied by anyone in SFO.
 SELECT S.supplier_name
 FROM supplier S, part_nyc PN, part_sfo PS
-WHERE PN.part_number NOT PS.part_number --without index
+WHERE PN.part_number NOT PS.part_number; --without index
 
 SELECT S.supplier_name
 FROM supplier S, part_nyc PN, part_sfo PS
@@ -58,8 +58,8 @@ WHERE on_hand = PN.on_hand; --with index
 --Delete all parts from NYC which have less than 30 parts on_hand.
 DELETE PN.part_number 
 FROM part_nyc PN 
-WHERE COUNT(PN.on_hand) < 30; --without index
+WHERE PN.on_hand < 30; --without index
 
 DELETE PN.part_number 
 FROM part_nyc PN
-WHERE COUNT(PN.*) < 30; --with index
+WHERE PN.* < 30; --with index
