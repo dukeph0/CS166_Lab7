@@ -1,3 +1,5 @@
+DROP INDEX IF EXISTS (part1_id, part2_id, part3_id, part4_id, part5_id, part6_id);
+
 CREATE INDEX part1_id
 ON lab7
 (result);
